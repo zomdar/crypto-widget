@@ -6,7 +6,13 @@ function App() {
     if (typeof parent !== undefined) {
       parent?.postMessage?.({ pluginMessage: "bitcoin" }, "*");
     }
+    console.log(parent)
+    console.log('hey')
+    // if (typeof parent !== undefined) {
+    //   parent?.postMessage?.({ pluginMessage: "bitcoin" }, "*");
+    // }
   }, []);
+
 
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
@@ -32,7 +38,7 @@ function App() {
                       type: "stock",
                       value: {
                         name: result.name,
-                        fullName: result.symbol,
+                        symbol: result.symbol,
                         price: result.market_data.current_price.usd,
                         change: result.market_data.price_change_24h,
                         changePercent: result.market_data.price_change_percentage_24h,
