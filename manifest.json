@@ -1,0 +1,11 @@
+{
+  "name": "lit stonks",
+  "id": "widget-id-epzPpU42ew",
+  "api": "1.0.0",
+  "editorType": ["figma","figjam"],
+  "permissions": [],
+  "containsWidget": true,
+  "main": "dist/code.js",
+  "ui": "dist/index.html",
+  "widgetApi": "1.0.0"
+}
