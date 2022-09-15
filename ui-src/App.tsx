@@ -6,11 +6,6 @@ function App() {
     if (typeof parent !== undefined) {
       parent?.postMessage?.({ pluginMessage: "bitcoin" }, "*");
     }
-    console.log(parent)
-    console.log('hey')
-    // if (typeof parent !== undefined) {
-    //   parent?.postMessage?.({ pluginMessage: "bitcoin" }, "*");
-    // }
   }, []);
 
 
