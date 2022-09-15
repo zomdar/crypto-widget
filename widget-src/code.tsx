@@ -37,9 +37,29 @@ function Widget() {
       },
     ],
     ({ propertyName, propertyValue }) => {
-      console.log(propertyName, propertyValue);
+      if (propertyName === "edit") {
+        return new Promise((resolve) => {
+          figma.showUI(__html__);
+          figma.ui.on("message", (msg) => {
+            if (msg.type === "stock") {
+              setStock(msg.value);
+            }
+            if (msg.type === "close") {
+              figma.closePlugin();
+            }
+          });
+        });
+      } else if (propertyName === "refresh") {
+        console.log("refresh");
+      }
     }
   );
+
+  useEffect(() => {
+    if (stock.name.length <= 0) {
+      console.log("iniitialized");
+    }
+  });
 
   const [stock, setStock] = useSyncedState("stock", {
     name: "",
