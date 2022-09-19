@@ -258,15 +258,10 @@ function Widget() {
                 </Frame>
               </Frame>
             </AutoLayout>
-            <Text
-              name="price"
-              fill="#A6A6A6" 
-              fontFamily="Inter"
-              fontSize={8}
-            >
-              Last Updated: {stock.lastUpdated}
-            </Text>
           </AutoLayout>
+          <Text name="price" fill="#A6A6A6" fontFamily="Inter" fontSize={10}>
+            Last Updated: {stock.lastUpdated}
+          </Text>
         </>
       )}
     </AutoLayout>
