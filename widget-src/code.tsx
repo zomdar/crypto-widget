@@ -23,6 +23,30 @@ interface Stock {
 }
 
 function Widget() {
+  const [stock, setStock] = useSyncedState("stock", {
+    name: "",
+    symbol: "",
+    price: 0,
+    change: 0,
+    changePercent: 0,
+    lastUpdated: Date.now(),
+  });
+
+  function fetchData() {
+    return new Promise<void>((resolve) => {
+      figma.showUI(__html__, { visible: false });
+      figma.ui.postMessage({
+        type: "networkRequest",
+        coin: stock.name.toLowerCase(),
+      });
+
+      figma.ui.onmessage = async (msg) => {
+        await setStock(msg);
+        resolve();
+      };
+    });
+  }
+
   usePropertyMenu(
     [
       {
@@ -50,25 +74,12 @@ function Widget() {
           });
         });
       } else if (propertyName === "refresh") {
-        console.log("refresh");
+        if (stock.name !== "") {
+          waitForTask(fetchData());
+        }
       }
     }
   );
-
-  useEffect(() => {
-    if (stock.name.length <= 0) {
-      console.log("iniitialized");
-    }
-  });
-
-  const [stock, setStock] = useSyncedState("stock", {
-    name: "",
-    symbol: "",
-    price: 0,
-    change: 0,
-    changePercent: 0,
-    lastUpdated: new Date(),
-  });
 
   return (
     <AutoLayout
@@ -141,7 +152,7 @@ function Widget() {
                 {stock.name}
               </Text>
               <Text name="Tesla Inc" fill="#A6A6A6" fontFamily="Inter">
-                {stock.symbol.toUpperCase()}
+                {stock.symbol?.toUpperCase()}
               </Text>
             </AutoLayout>
           </AutoLayout>
@@ -150,6 +161,7 @@ function Widget() {
             overflow="visible"
             direction="vertical"
             height={61}
+            spacing={10}
           >
             <Text
               name="price"
@@ -158,7 +170,7 @@ function Widget() {
               fontSize={32}
               fontWeight={700}
             >
-              ${stock.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
+              ${stock.price?.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}
             </Text>
             <AutoLayout
               name="price"
@@ -174,7 +186,7 @@ function Widget() {
                 fontFamily="Inter"
                 fontSize={18}
               >
-                {stock.changePercent.toFixed(2)}%
+                {stock.changePercent?.toFixed(2)}%
               </Text>
               <Frame
                 name="trending icons"
@@ -246,6 +258,14 @@ function Widget() {
                 </Frame>
               </Frame>
             </AutoLayout>
+            <Text
+              name="price"
+              fill="#A6A6A6" 
+              fontFamily="Inter"
+              fontSize={8}
+            >
+              Last Updated: {stock.lastUpdated}
+            </Text>
           </AutoLayout>
         </>
       )}

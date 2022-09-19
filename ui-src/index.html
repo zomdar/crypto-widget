@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      window.onmessage = async (event) => {
+        if (event.data.pluginMessage.type === "networkRequest") {
+          const coin = event.data.pluginMessage.coin;
+          const res = await fetch(
+            `https://api.coingecko.com/api/v3/coins/${encodeURIComponent(coin)}`
+          );
+          const data = await res.json();
+          const msg = {
+            name: data.name,
+            symbol: data.symbol,
+            price: data.market_data.current_price.usd,
+            change: data.market_data.price_change_24h,
+            changePercent: data.market_data.price_change_percentage_24h,
+            lastUpdated: data.last_updated,
+          };
+
+          window.parent.postMessage(
+            {
+              pluginMessage: msg,
+            },
+            "*"
+          );
+        }
+      };
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Widget Template</title>

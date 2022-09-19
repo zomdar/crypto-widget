@@ -8,7 +8,6 @@ function App() {
     }
   }, []);
 
-
   const [message, setMessage] = useState("");
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,7 +35,8 @@ function App() {
                         symbol: result.symbol,
                         price: result.market_data.current_price.usd,
                         change: result.market_data.price_change_24h,
-                        changePercent: result.market_data.price_change_percentage_24h,
+                        changePercent:
+                          result.market_data.price_change_percentage_24h,
                         lastUpdated: result.last_updated,
                       },
                     },
