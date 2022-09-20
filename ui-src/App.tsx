@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <input id="name" type="text" placeholder="Stock Name" />
+      <input className="crypto-name-input" id="name" type="text" placeholder="Crypto Name" />
       <button
         className="primary-btn"
         onClick={() => {
