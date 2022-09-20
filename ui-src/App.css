@@ -1,3 +1,25 @@
 .App {
-  padding: 20px;
+  padding: 16px;
+  flex-flow: column;
+}
+
+.primary-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 80px;
+  text-align: center;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.primary-btn:hover {
+  background-color: #5aa2ef;
+}
+
+.primary-btn:active {
+  border: 1px solid #006de1;
 }
