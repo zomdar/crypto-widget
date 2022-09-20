@@ -1,7 +1,7 @@
 {
-  "name": "lit stonks",
+  "name": "price-is-crypto",
   "version": "1.0.0",
-  "description": "lit stonks",
+  "description": "price-is-crypto",
   "scripts": {
     "test": "npm run tsc && npm run build",
     "format": "prettier --write .",
