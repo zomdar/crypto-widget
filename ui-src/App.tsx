@@ -17,10 +17,12 @@ function App() {
     <div className="App">
       <input id="name" type="text" placeholder="Stock Name" />
       <button
+        className="primary-btn"
         onClick={() => {
           const name = document.getElementById("name") as HTMLInputElement;
+          const value = name.value.toLowerCase();
 
-          fetch("https://api.coingecko.com/api/v3/coins/" + name.value)
+          fetch("https://api.coingecko.com/api/v3/coins/" + value)
             .then((res) => res.json())
             .then(
               (result) => {
@@ -52,7 +54,7 @@ function App() {
             );
         }}
       >
-        Add Stock
+        Save
       </button>
     </div>
   );
