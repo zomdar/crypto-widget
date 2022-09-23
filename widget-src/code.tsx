@@ -37,7 +37,7 @@ function Widget() {
       figma.showUI(__html__, { visible: false });
       figma.ui.postMessage({
         type: "networkRequest",
-        coin: stock.name.toLowerCase(),
+        coin: stock?.name.toLowerCase(),
       });
 
       figma.ui.onmessage = async (msg) => {
@@ -75,7 +75,10 @@ function Widget() {
         });
       } else if (propertyName === "refresh") {
         if (stock.name !== "") {
-          waitForTask(fetchData());
+          return new Promise<void>((resolve) => {
+            waitForTask(fetchData());
+            resolve();
+          });
         }
       }
     }
